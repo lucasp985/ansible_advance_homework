@@ -8,7 +8,7 @@
       meta: "group={{ item.value.group }},deployment_name={{ item.value.deployment_name }}"
       flavor: m2.small
       security_groups: "{{ item.value.security_group }}"
-      with_dict: "{{ osp_servers }}"
+      loop: "{{ lookup('dict', osp_servers) }}" 
       key_name: ansible_ssh
       wait: yes
       nics:
@@ -29,7 +29,7 @@
       network: ext_network
       wait: true
       timeout: 180
-      with_dict: "{{ osp_servers }}"
+      loop: "{{ lookup('dict', osp_servers) }}"
     register: instancefloatingip
   - name: Show "{{ instanceip }}" public IP
     debug: var=instancefloatingip.floating_ip.floating_ip_address
@@ -39,5 +39,5 @@
       port: 22
       search_regex: OpenSSH
       timeout: 600
-      with_dict: "{{ osp_servers }}"
+      loop: "{{ lookup('dict', osp_servers) }}"
     delegate_to: "{{ inventory_hostname }}"
