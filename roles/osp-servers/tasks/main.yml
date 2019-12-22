@@ -12,15 +12,15 @@
       wait: yes
       nics:
       - net-name: int_network
-    with_subelements:
-      - "{{ osp_servers }}"
-      - meta
       userdata: |
         #!/bin/bash
         curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub
         cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
         curl -o /tmp/internal.repo http://www.opentlc.com/download/ansible_bootcamp/repo/internal.repo
         cp /tmp/internal.repo /etc/yum.repos.d/internal.repo
+    with_subelements:
+       - "{{ osp_servers }}"
+       - meta
     register: instanceip
 
   - name: Add floating IP to "{{ item.0.name }}"
@@ -32,10 +32,10 @@
       network: ext_network
       wait: true
       timeout: 180
-    register: instancefloatingip
     with_subelements:
        - "{{ osp_servers }}"
        - meta
+    register: instancefloatingip
 
   - name: Show "{{ instanceip }}" public IP
     debug: var=instancefloatingip.floating_ip.floating_ip_address
@@ -45,8 +45,7 @@
       port: 22
       search_regex: OpenSSH
       timeout: 600
-    delegate_to: "{{ inventory_hostname }}"
     with_subelements:
        - "{{ osp_servers }}"
        - meta
-
+    delegate_to: "{{ inventory_hostname }}"
