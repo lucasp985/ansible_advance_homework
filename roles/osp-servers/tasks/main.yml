@@ -39,7 +39,7 @@
 
   - name: Show var
     debug:
-      msg: "{{ "{{ item.0.name }}"_instancefloatingip }}"
+      msg: "{{ {{ item.0.name }}_instancefloatingip }}"
     with_subelements:
        - "{{ osp_servers }}"
        - meta
