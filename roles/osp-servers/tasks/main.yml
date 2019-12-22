@@ -32,14 +32,17 @@
       network: ext_network
       wait: true
       timeout: 180
-    register: instancefloatingip
+    register: "{{ item.0.name }}"_instancefloatingip
     with_subelements:
        - "{{ osp_servers }}"
        - meta
 
   - name: Show var
     debug:
-      msg: "{{ instancefloatingip }}"
+      msg: "{{ "{{ item.0.name }}"_instancefloatingip }}"
+    with_subelements:
+       - "{{ osp_servers }}"
+       - meta
 
   - name: Show "{{ instanceip }}" public IP
     debug: var=instancefloatingip.floating_ip.floating_ip_address
