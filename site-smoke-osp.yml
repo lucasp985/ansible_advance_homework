@@ -12,7 +12,7 @@
   - name: Curl website
     command: curl "http://{{item.public_v4}}"
     with_items:
-       - "{{ openstack_info.ansible_facts.openstack_servers }}"
+       - "{{ openstack_info.openstack_servers }}"
     register: webpage
 
   - name: Fail if 'Ansible has done its job' is not in the page content
