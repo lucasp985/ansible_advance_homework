@@ -33,7 +33,7 @@
       wait: true
       timeout: 180
     register: instancefloatingip
-    with_dict: "{{ osp_servers }]"
+    with_dict: "{{ osp_servers }}"
 
   - name: Show "{{ instanceip }}" public IP
     debug: var=instancefloatingip.floating_ip.floating_ip_address
