@@ -36,7 +36,10 @@
     with_dict: "{{ osp_servers }}"
 
   - name: Show "{{ instancefloatingip }}" public IP
-    debug: var=instancefloatingip.results.floating_ip.floating_ip_address
+    #debug: var=instancefloatingip.results.floating_ip.floating_ip_address
+    debug:
+      msg: " Test var {{ instancefloatingip.key }}"
+      
   - name: Wait for "{{ item.key }}" to be available
     wait_for:
       host: "{{ instancefloatingip.floating_ip.floating_ip_address }}"
