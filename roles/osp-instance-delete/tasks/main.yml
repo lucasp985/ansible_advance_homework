@@ -7,6 +7,9 @@
 
   - name: Check Var
     debug:
-      msg: " {{ result }}"
+      msg: " {{ item.name }}"
+    with_items:
+       - "{{ result.openstack_servers }}"
+
   #- name: Delete instances
    
