@@ -7,7 +7,7 @@
 
   - name: Check Var
     debug:
-      msg: " {{ item.name }}"
+      msg: "Name is {{ item.name }} "
     with_items:
        - "{{ result.openstack_servers }}"
 
