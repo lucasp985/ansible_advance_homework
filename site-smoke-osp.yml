@@ -17,9 +17,7 @@
    
   - name: Test Var Webpage
     debug:
-      msg: "The content is {{ item.stdout }}"
-    with_items:
-      - webpage
+      msg: "The content is {{ webpage }}"
 
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
