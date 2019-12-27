@@ -15,12 +15,12 @@
        - "{{ openstack_info.openstack_servers }}"
     register: webpage
    
-  - name: Test Var Website
+  - name: Test Var Webpage
     debug:
-      msg: "The content is {{ website.stdout }}"
+      msg: "The content is {{ webpage.stdout }}"
 
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
-    when: "'Ansible has done its job' not in webpage.results[0].content"
+    when: "'Ansible has done its job' not in webpage.stdout"
     tags:
       - osp.smoke
