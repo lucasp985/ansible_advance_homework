@@ -22,7 +22,7 @@
     - apps
     - tag_AnsibleGroup_apps
   become: yes
-  gather_facts: false
+  #gather_facts: false
   roles:
     - {name: base-config, tags: base-config}
     - {name: app-tier, tags: [apps, tomcat]}
